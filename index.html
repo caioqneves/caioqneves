@@ -60,17 +60,17 @@
     .grid { display: grid; grid-template-columns: repeat(3, 1fr); border-left: 0.5px solid var(--border); }
 
     /* ── CARD ── */
-    .card { border-right: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); cursor: pointer; position: relative; overflow: hidden; aspect-ratio: 3/4; }
-    .card-img { width: 100%; height: 100%; transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+    .card { border-right: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); cursor: pointer; position: relative; overflow: hidden; aspect-ratio: 3/4; background: #100404; }
+    .card-img { width: 100%; height: 100%; transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); object-fit: cover; display: block; }
     .card:hover .card-img { transform: scale(1.05); }
     .card-img svg { width: 100%; height: 100%; display: block; }
-    .card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(14,8,8,0.96) 0%, rgba(14,8,8,0) 55%); opacity: 0; transition: opacity 0.3s; display: flex; flex-direction: column; justify-content: flex-end; padding: 1.2rem; }
+    .card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(14,8,8,0.97) 0%, rgba(14,8,8,0.15) 65%, rgba(14,8,8,0) 100%); opacity: 0; transition: opacity 0.3s; display: flex; flex-direction: column; justify-content: flex-end; padding: 1.4rem; }
     .card:hover .card-overlay { opacity: 1; }
-    .card-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 0.06em; color: var(--text); line-height: 1.1; transform: translateY(10px); transition: transform 0.3s; }
+    .card-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.05em; color: var(--text); line-height: 1.05; transform: translateY(10px); transition: transform 0.3s; }
     .card:hover .card-title { transform: translateY(0); }
-    .card-cat { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); margin-top: 5px; transform: translateY(10px); transition: transform 0.35s; }
+    .card-cat { font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); margin-top: 6px; transform: translateY(10px); transition: transform 0.35s; }
     .card:hover .card-cat { transform: translateY(0); }
-    .card-num { position: absolute; top: 10px; left: 12px; font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-dim); letter-spacing: 0.1em; }
+    .card-num { position: absolute; top: 10px; left: 12px; font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-dim); letter-spacing: 0.1em; z-index: 2; }
 
     /* ── MODAL ── */
     .modal-backdrop {
@@ -84,17 +84,12 @@
 
     .modal {
       background: #130606; border: 0.5px solid rgba(242,238,239,0.12);
-      max-width: 900px; width: 100%; max-height: 90vh; overflow-y: auto;
-      display: grid; grid-template-columns: 1fr 1fr;
+      max-width: 760px; width: 100%; max-height: 90vh; overflow-y: auto;
       transform: translateY(24px); transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
       scrollbar-width: thin; scrollbar-color: var(--red-dark) transparent;
+      position: relative;
     }
     .modal-backdrop.open .modal { transform: translateY(0); }
-
-    .modal-media { position: relative; aspect-ratio: 3/4; overflow: hidden; }
-    .modal-media svg { width: 100%; height: 100%; display: block; }
-
-    .modal-body { padding: 2.5rem 2rem; display: flex; flex-direction: column; gap: 1.5rem; border-left: 0.5px solid rgba(242,238,239,0.1); }
 
     .modal-close {
       position: absolute; top: 1rem; right: 1rem;
@@ -105,26 +100,29 @@
     }
     .modal-close:hover { color: var(--text); border-color: var(--red); }
 
+    .modal-header { padding: 2rem 2rem 1.5rem; border-bottom: 0.5px solid var(--border); }
     .modal-cat { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); }
-    .modal-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(28px, 4vw, 42px); line-height: 0.95; letter-spacing: 0.02em; }
+    .modal-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(32px, 5vw, 48px); line-height: 0.95; letter-spacing: 0.02em; margin-top: 0.4rem; }
+
+    .modal-body { padding: 1.5rem 2rem 2rem; display: flex; flex-direction: column; gap: 1.5rem; }
 
     .modal-tags { display: flex; flex-wrap: wrap; gap: 6px; }
     .modal-tag { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; padding: 4px 10px; border: 0.5px solid rgba(242,238,239,0.15); color: var(--text-muted); }
 
     .modal-desc { font-size: 13px; line-height: 1.8; color: var(--text-muted); }
 
-    .modal-meta { display: flex; flex-direction: column; gap: 0.6rem; padding-top: 1rem; border-top: 0.5px solid var(--border); }
-    .modal-meta-row { display: flex; justify-content: space-between; }
+    .modal-meta { display: flex; flex-wrap: wrap; gap: 1.5rem; padding-top: 1rem; border-top: 0.5px solid var(--border); }
+    .modal-meta-item { display: flex; flex-direction: column; gap: 4px; }
     .modal-meta-label { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim); }
-    .modal-meta-val { font-size: 11px; letter-spacing: 0.08em; color: var(--text-muted); }
+    .modal-meta-val { font-size: 12px; letter-spacing: 0.04em; color: var(--text-muted); }
 
-    .modal-cta { margin-top: auto; padding-top: 1.5rem; }
-    .modal-cta a {
-      display: inline-block; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--text); text-decoration: none; padding: 10px 20px;
-      border: 1px solid var(--red-dark); transition: background 0.2s, color 0.2s;
+    /* ── MODAL GALLERY ── */
+    .modal-gallery { display: flex; flex-direction: column; gap: 0.8rem; }
+    .modal-gallery img {
+      width: 100%; display: block; object-fit: cover;
+      border: 0.5px solid var(--border);
+      filter: grayscale(8%) contrast(1.03);
     }
-    .modal-cta a:hover { background: var(--red-dark); }
 
     /* ── ABOUT ── */
     .about { border-top: 0.5px solid var(--border); display: grid; grid-template-columns: 1.1fr 1fr; height: 500px; }
@@ -171,18 +169,22 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 780px) {
-      .modal { grid-template-columns: 1fr; }
-      .modal-media { aspect-ratio: 16/9; }
-      .modal-body { border-left: none; border-top: 0.5px solid rgba(242,238,239,0.1); }
       .grid { grid-template-columns: repeat(2, 1fr); }
-      .hero { flex-direction: column; gap: 1.5rem; }
+      .hero { flex-direction: column; align-items: flex-start; gap: 1.5rem; text-align: left; }
+      .hero-title { text-align: left; }
       .hero-meta { text-align: left; }
       nav { padding: 1.2rem 1.5rem; }
       .nav-links { gap: 1.5rem; }
       .about { grid-template-columns: 1fr; height: auto; }
       .about-photo { aspect-ratio: 16/9; height: 240px; order: -1; border-left: none; border-bottom: 0.5px solid var(--border); }
+      .modal { max-width: 95vw; }
     }
-    @media (max-width: 450px) { .grid { grid-template-columns: 1fr; } .nav-links { display: none; } }
+    @media (max-width: 450px) {
+      .grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .card-title { font-size: 24px; }
+      .card-cat { font-size: 12px; }
+    }
   </style>
 </head>
 <body>
@@ -259,21 +261,22 @@
       <li><a href="https://www.linkedin.com/in/caioqneves/" target="_blank">LinkedIn</a></li>
       <li><a href="mailto:caioqneves@gmail.com">caioqneves@.com</a></li>
     </ul>
-    <p class="footer-copy">© 2025 Seu Nome</p>
+    <p class="footer-copy">© 2025 Caio Neves</p>
   </footer>
 
   <!-- MODAL -->
   <div class="modal-backdrop" id="modalBackdrop">
     <div class="modal" id="modal" role="dialog" aria-modal="true">
-      <div class="modal-media" id="modalMedia">
-        <button class="modal-close" id="modalClose" aria-label="Fechar">✕</button>
-      </div>
-      <div class="modal-body">
+      <button class="modal-close" id="modalClose" aria-label="Fechar">✕</button>
+      <div class="modal-header">
         <p class="modal-cat" id="modalCat"></p>
         <h2 class="modal-title" id="modalTitle"></h2>
+      </div>
+      <div class="modal-body">
         <div class="modal-tags" id="modalTags"></div>
         <p class="modal-desc" id="modalDesc"></p>
         <div class="modal-meta" id="modalMeta"></div>
+        <div class="modal-gallery" id="modalGallery"></div>
       </div>
     </div>
   </div>
@@ -303,7 +306,6 @@
         "contact-label": "Contact", "contact-title-html": "Let's<br>talk?",
         "contact-text": "I'm available for new projects, partnerships and collaborations. Get in touch through the channels below.",
         "contact-email-label": "Email", "contact-instagram-label": "Instagram", "contact-linkedin-label": "LinkedIn",
-        "modal-cta": "View full project →",
         "modal-year-label": "Year", "modal-client-label": "Client", "modal-role-label": "Role",
       }
     };
@@ -336,14 +338,25 @@
       if (btn) applyLang(btn.dataset.lang);
     });
 
-    /* ── PROJECTS DATA ── */
+    /* ── PROJECTS DATA ──
+       Para usar suas próprias fotos:
+       1. Coloque os arquivos dentro de assets/projects/ (ex: assets/projects/gracie-barra-cover.jpg)
+       2. Defina "cover" com o caminho da imagem de capa do card
+       3. Em "gallery", liste as imagens extras que aparecem no pop-up
+       Se "cover" ficar vazio (""), uma forma geométrica placeholder é usada no lugar.
+    ── */
     const projects = [
       {
         title: { pt: "Gracie Barra",  en: "Gracie Barra" },
-        cat:   { pt: "Social Media",            en: "Social Media" },
+        cat:   { pt: "Social Media",  en: "Social Media" },
         desc:  { pt: "Desenvolvimento completo de identidade visual para startup de tecnologia, incluindo logo, paleta, tipografia e guia de marca.", en: "Full visual identity for a tech startup, including logo, palette, typography, and brand guidelines." },
         tags: ["Instagram", "Posts", "Identidade Visual"],
         year: "2026", client: "Gracie", role: { pt: "Designer Líder", en: "Lead Designer" },
+        cover: "assets/projects/gracie-barra-cover.jpg",
+        gallery: [
+          "assets/projects/gracie-barra-1.jpg",
+          "assets/projects/gracie-barra-2.jpg"
+        ],
         bg: "#180404", accent: "#c21505", shape: "circle"
       },
       {
@@ -352,6 +365,11 @@
         desc:  { pt: "Série de cartazes para festival de música independente, com direção de arte e criação tipográfica.", en: "Poster series for an independent music festival, with art direction and typographic creation." },
         tags: ["Poster", "Typography", "Print"],
         year: "2023", client: "Festival Y", role: { pt: "Diretor de Arte", en: "Art Director" },
+        cover: "assets/projects/cartaz-festival-cover.jpg",
+        gallery: [
+          "assets/projects/cartaz-festival-1.jpg",
+          "assets/projects/cartaz-festival-2.jpg"
+        ],
         bg: "#1a0a08", accent: "#8d0001", shape: "rect"
       },
       {
@@ -360,6 +378,11 @@
         desc:  { pt: "Design de embalagem para linha de cosméticos naturais, com foco em sustentabilidade e elegância.", en: "Packaging design for a natural cosmetics line, focused on sustainability and elegance." },
         tags: ["Packaging", "Cosmetics", "Illustration"],
         year: "2024", client: "Marca Z", role: { pt: "Designer Gráfico", en: "Graphic Designer" },
+        cover: "assets/projects/embalagem-cover.jpg",
+        gallery: [
+          "assets/projects/embalagem-1.jpg",
+          "assets/projects/embalagem-2.jpg"
+        ],
         bg: "#140606", accent: "#bd8c78", shape: "triangle"
       },
       {
@@ -368,6 +391,11 @@
         desc:  { pt: "Sistema de identidade visual para plataforma de educação, com tokens de design e biblioteca de componentes.", en: "Visual identity system for an education platform, with design tokens and component library." },
         tags: ["Design System", "UI", "Brand"],
         year: "2023", client: "EduPlatform", role: { pt: "Designer Líder", en: "Lead Designer" },
+        cover: "assets/projects/sistema-visual-cover.jpg",
+        gallery: [
+          "assets/projects/sistema-visual-1.jpg",
+          "assets/projects/sistema-visual-2.jpg"
+        ],
         bg: "#1c0404", accent: "#c21505", shape: "lines"
       },
       {
@@ -376,6 +404,11 @@
         desc:  { pt: "Campanha visual para redes sociais com animações e templates editáveis para equipe de marketing.", en: "Visual campaign for social media with animations and editable templates for the marketing team." },
         tags: ["Motion", "Social Media", "Animation"],
         year: "2024", client: "Agência W", role: { pt: "Motion Designer", en: "Motion Designer" },
+        cover: "assets/projects/campanha-digital-cover.jpg",
+        gallery: [
+          "assets/projects/campanha-digital-1.jpg",
+          "assets/projects/campanha-digital-2.jpg"
+        ],
         bg: "#160808", accent: "#f2eeef", shape: "dots"
       },
       {
@@ -384,6 +417,11 @@
         desc:  { pt: "Projeto editorial para revista trimestral de arquitetura, diagramação e direção de fotografia.", en: "Editorial project for a quarterly architecture magazine, layout and photography direction." },
         tags: ["Layout", "Typography", "Editorial"],
         year: "2022", client: "Revista V", role: { pt: "Designer Editorial", en: "Editorial Designer" },
+        cover: "assets/projects/editorial-revista-cover.jpg",
+        gallery: [
+          "assets/projects/editorial-revista-1.jpg",
+          "assets/projects/editorial-revista-2.jpg"
+        ],
         bg: "#180202", accent: "#8d0001", shape: "cross"
       },
       {
@@ -392,6 +430,11 @@
         desc:  { pt: "Sistema de sinalização para complexo cultural, com painéis, totens e mapeamento de fluxo.", en: "Wayfinding system for a cultural complex, including panels, totems and flow mapping." },
         tags: ["Wayfinding", "Signage", "Environmental"],
         year: "2023", client: "Centro Cultural", role: { pt: "Designer Gráfico", en: "Graphic Designer" },
+        cover: "assets/projects/sinalizacao-cover.jpg",
+        gallery: [
+          "assets/projects/sinalizacao-1.jpg",
+          "assets/projects/sinalizacao-2.jpg"
+        ],
         bg: "#140404", accent: "#bd8c78", shape: "circle"
       },
       {
@@ -400,6 +443,11 @@
         desc:  { pt: "Projeto gráfico de livro de artista, com fotolito, impressão especial e acabamento artesanal.", en: "Graphic design for an artist book, with special printing techniques and handmade finishing." },
         tags: ["Book Design", "Print", "Art"],
         year: "2022", client: "Artista T", role: { pt: "Diretor de Arte", en: "Art Director" },
+        cover: "assets/projects/livro-arte-cover.jpg",
+        gallery: [
+          "assets/projects/livro-arte-1.jpg",
+          "assets/projects/livro-arte-2.jpg"
+        ],
         bg: "#1a0606", accent: "#c21505", shape: "rect"
       },
       {
@@ -408,6 +456,11 @@
         desc:  { pt: "Identidade visual para evento anual de design, com aplicações em ambientação, digital e merchandising.", en: "Visual identity for an annual design event, with applications in environment, digital and merchandising." },
         tags: ["Event", "Identity", "Environmental"],
         year: "2024", client: "Design Week", role: { pt: "Designer Líder", en: "Lead Designer" },
+        cover: "assets/projects/marca-evento-cover.jpg",
+        gallery: [
+          "assets/projects/marca-evento-1.jpg",
+          "assets/projects/marca-evento-2.jpg"
+        ],
         bg: "#100202", accent: "#f2eeef", shape: "triangle"
       },
     ];
@@ -424,6 +477,14 @@
       return s[shape] || s.circle;
     }
 
+    /* Returns an <img> with onerror fallback to the geometric placeholder SVG */
+    function coverMarkup(p) {
+      const placeholder = makeSVG(p.shape, p.accent, p.bg);
+      const encodedPlaceholder = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(placeholder)));
+      if (!p.cover) return placeholder;
+      return `<img class="card-img" src="${p.cover}" alt="${p.title.pt}" onerror="this.onerror=null;this.outerHTML='${placeholder.replace(/'/g, "\\'")}'">`;
+    }
+
     /* ── BUILD GRID ── */
     const grid = document.getElementById('grid');
     projects.forEach((p, i) => {
@@ -431,7 +492,7 @@
       card.className = 'card';
       card.setAttribute('tabindex', '0');
       card.innerHTML = `
-        <div class="card-img">${makeSVG(p.shape, p.accent, p.bg)}</div>
+        ${coverMarkup(p)}
         <div class="card-overlay">
           <div class="card-title" data-proj="${i}" data-field="title">${p.title.pt}</div>
           <div class="card-cat" data-proj="${i}" data-field="cat">${p.cat.pt}</div>
@@ -445,14 +506,11 @@
 
     /* ── MODAL LOGIC ── */
     const backdrop = document.getElementById('modalBackdrop');
-    const modalMedia = document.getElementById('modalMedia');
     const modalClose = document.getElementById('modalClose');
 
     function openModal(i) {
       const p = projects[i];
       const t = i18n[lang];
-      modalMedia.innerHTML = `<button class="modal-close" id="modalClose" aria-label="Fechar">✕</button>` + makeSVG(p.shape, p.accent, p.bg);
-      document.getElementById('modalClose').addEventListener('click', closeModal);
       document.getElementById('modalCat').textContent = p.cat[lang];
       document.getElementById('modalTitle').textContent = p.title[lang];
 
@@ -462,10 +520,17 @@
       document.getElementById('modalDesc').textContent = p.desc[lang];
 
       document.getElementById('modalMeta').innerHTML = `
-        <div class="modal-meta-row"><span class="modal-meta-label">${t['modal-year-label']}</span><span class="modal-meta-val">${p.year}</span></div>
-        <div class="modal-meta-row"><span class="modal-meta-label">${t['modal-client-label']}</span><span class="modal-meta-val">${p.client}</span></div>
-        <div class="modal-meta-row"><span class="modal-meta-label">${t['modal-role-label']}</span><span class="modal-meta-val">${p.role[lang]}</span></div>
+        <div class="modal-meta-item"><span class="modal-meta-label">${t['modal-year-label']}</span><span class="modal-meta-val">${p.year}</span></div>
+        <div class="modal-meta-item"><span class="modal-meta-label">${t['modal-client-label']}</span><span class="modal-meta-val">${p.client}</span></div>
+        <div class="modal-meta-item"><span class="modal-meta-label">${t['modal-role-label']}</span><span class="modal-meta-val">${p.role[lang]}</span></div>
       `;
+
+      const galleryEl = document.getElementById('modalGallery');
+      const placeholder = makeSVG(p.shape, p.accent, p.bg);
+      galleryEl.innerHTML = (p.gallery && p.gallery.length)
+        ? p.gallery.map(src => `<img src="${src}" alt="${p.title[lang]}" onerror="this.onerror=null;this.outerHTML='${placeholder.replace(/'/g, "\\'")}'">`).join('')
+        : placeholder;
+
       backdrop.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
@@ -475,6 +540,7 @@
       document.body.style.overflow = '';
     }
 
+    modalClose.addEventListener('click', closeModal);
     backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
   </script>
